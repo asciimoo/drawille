@@ -364,15 +364,16 @@ def line(x1, y1, x2, y2):
 
     xdiff = max(x1, x2) - min(x1, x2)
     ydiff = max(y1, y2) - min(y1, y2)
-
     xdir = 1 if x1 <= x2 else -1
     ydir = 1 if y1 <= y2 else -1
 
-    if xdiff > ydiff:
-        for i in range(x1, x2, xdir):
-            y = y1 + float(i)/xdiff * ydiff*ydir
-            yield (i*xdir, y)
-    else:
-        for i in range(y1, y2, ydir):
-            x = x1 + float(i)/ydiff * xdiff*xdir
-            yield (x, i*ydir)
+    r = max(xdiff, ydiff)
+
+    for i in range(r+1):
+        x = x1
+        y = y1
+        if ydiff:
+            y += (float(i)*ydiff)/r*ydir
+        if xdiff:
+            x += (float(i)*xdiff)/r*xdir
+        yield (x, y)
