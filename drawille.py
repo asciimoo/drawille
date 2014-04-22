@@ -366,7 +366,7 @@ def line(x1, y1, x2, y2):
     if xdiff > ydiff:
         for i in range(x1, x2, xdir):
             y = y1 + float(i)/xdiff * ydiff*ydir
-            yield (x1 + i, y*ydir)
+            yield (x1 + i*xdir, y)
     else:
         for i in range(y1, y2, ydir):
             x = x1 + float(i)/ydiff * xdiff*xdir
