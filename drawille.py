@@ -280,6 +280,18 @@ braille_map = {
 '12345678' : '⣿'
 }
 
+def normalize(coord):
+    coord_type = type(coord)
+
+    if coord_type == int:
+        return coord
+
+    elif coord_type == float:
+        return int(round(coord))
+
+
+
+
 class Canvas(object):
     """docstring for Surface"""
     def __init__(self, line_ending='\n'):
@@ -291,13 +303,19 @@ class Canvas(object):
         self.pixels = defaultdict(dict)
 
     def set(self, x, y):
+        x = normalize(x)
+        y = normalize(y)
         self.pixels[y][x] = pixel_map[y % 4][x % 2]
 
     def unset(self, x, y):
+        x = normalize(x)
+        y = normalize(y)
         if y in self.pixels and x in self.pixels[y]:
             del(self.pixels[y][x])
 
     def toggle(self, x, y):
+        x = normalize(x)
+        y = normalize(y)
         if y in self.pixels and x in self.pixels[y]:
             self.unset(x, y)
         else:
@@ -335,6 +353,11 @@ class Canvas(object):
 
 def line(x1, y1, x2, y2):
 
+    x1 = normalize(x1)
+    y1 = normalize(y1)
+    x2 = normalize(x2)
+    y2 = normalize(y2)
+
     xdiff = max(x1, x2) - min(x1, x2)
     ydiff = max(y1, y2) - min(y1, y2)
 
@@ -343,11 +366,11 @@ def line(x1, y1, x2, y2):
 
     if xdiff > ydiff:
         for i in range(x1, x2, xdir):
-            y = y1 + int(float(i)/xdiff * ydiff)*ydir
+            y = y1 + float(i)/xdiff * ydiff*ydir
             yield (x1 + i, y*ydir)
     else:
         for i in range(y1, y2, ydir):
-            x = x1 + int(float(i)/ydiff * xdiff)*xdir
+            x = x1 + float(i)/ydiff * xdiff*xdir
             yield (x, y1 + i*ydir)
 
 
@@ -355,24 +378,24 @@ if __name__ == '__main__':
 
     s = Canvas()
     for x in range(1800):
-        coords = (x/10, int(math.sin(math.radians(x)) * 10))
+        coords = (x/10, math.sin(math.radians(x)) * 10)
         s.set(*coords)
     print s.frame()
     s.clear()
     for x in range(0, 1800, 10):
-        coords = (x/10, 10 + int(round(math.sin(math.radians(x)) * 10)))
+        coords = (x/10, 10 + math.sin(math.radians(x)) * 10)
         s.set(*coords)
-        coords = (x/10, 10 + int(round(math.cos(math.radians(x)) * 10)))
+        coords = (x/10, 10 + math.cos(math.radians(x)) * 10)
         s.set(*coords)
     print s.frame()
     s.clear()
     for x in range(0, 3600, 20):
-        coords = (x/20, 4 + int(round(math.sin(math.radians(x)) * 4)))
+        coords = (x/20, 4 + math.sin(math.radians(x)) * 4)
         s.set(*coords)
     print s.frame()
     s.clear()
     for x in range(0, 360, 4):
-        coords = (x/4, 30 + int(round(math.sin(math.radians(x)) * 30)))
+        coords = (x/4, 30 + math.sin(math.radians(x)) * 30)
         s.set(*coords)
     for x in range(30):
         for y in range(30):
