@@ -349,7 +349,7 @@ class Canvas(object):
 
         if buff and i % 4:
             maxcol = max(max(buff.keys() or [0]), 4)
-            ret += ''.join(braille_map[''.join(sorted(buff.get(x, [])))] for x in range(maxcol+1))
+            ret += ''.join(braille_map[''.join(sorted(buff.get(x, [])))] for x in range(mincol, maxcol+1))
 
         return ret
 
