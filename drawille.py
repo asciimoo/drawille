@@ -324,6 +324,10 @@ class Canvas(object):
         minrow = min(self.pixels.keys())
         minrow -= minrow % 4
         maxrow = max(self.pixels.keys())
+        mincol = min(min(x) for x in self.pixels.values())/2
+        mincol -= mincol % 2
+        maxcol = max(max(x) for x in self.pixels.values())/2
+        maxcol += maxcol % 2
         ret = ''
         i = 0
         for rownum in range(minrow, maxrow+1):
@@ -337,7 +341,7 @@ class Canvas(object):
 
             if i % 4 == 3:
                 maxcol = max(max(buff.keys() or [0]), 4)
-                ret += ''.join(braille_map[''.join(sorted(buff.get(x, [])))] for x in range(maxcol+1))
+                ret += ''.join(braille_map[''.join(sorted(buff.get(x, [])))] for x in range(mincol, maxcol+1))
                 if rownum != maxrow:
                     ret += self.line_ending
 
@@ -351,6 +355,7 @@ class Canvas(object):
 
 
 def line(x1, y1, x2, y2):
+
 
     x1 = normalize(x1)
     y1 = normalize(y1)
@@ -366,8 +371,8 @@ def line(x1, y1, x2, y2):
     if xdiff > ydiff:
         for i in range(x1, x2, xdir):
             y = y1 + float(i)/xdiff * ydiff*ydir
-            yield (x1 + i*xdir, y)
+            yield (i*xdir, y)
     else:
         for i in range(y1, y2, ydir):
             x = x1 + float(i)/ydiff * xdiff*xdir
-            yield (x, y1 + i*ydir)
+            yield (x, i*ydir)
