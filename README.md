@@ -18,7 +18,7 @@ c = Canvas()
 for x in range(0, 1800, 10):
     c.set(x / 10, 10 + sin(radians(x)) * 10)
 
-print s.frame()
+print c.frame()
 ```
 
 
