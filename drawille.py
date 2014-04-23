@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collections import defaultdict
+import math
 
 """
 
@@ -377,3 +378,17 @@ def line(x1, y1, x2, y2):
         if xdiff:
             x += (float(i)*xdiff)/r*xdir
         yield (x, y)
+
+
+def polygon(center_x=0, center_y=0, sides=4, radius=4):
+    degree = float(360)/sides
+
+    for n in range(sides):
+        a = n*degree
+        b = (n+1)*degree
+        x1 = (center_x+math.cos(math.radians(a)))*(radius+1)/2
+        y1 = (center_x+math.sin(math.radians(a)))*(radius+1)/2
+        x2 = (center_x+math.cos(math.radians(b)))*(radius+1)/2
+        y2 = (center_x+math.sin(math.radians(b)))*(radius+1)/2
+        for x,y in line(x1,y1,x2,y2):
+            yield x,y
