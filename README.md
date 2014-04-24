@@ -2,9 +2,15 @@ DRAWILLE
 ========
 
 
-Drawing in terminal with unicode braille characters
+Drawing in terminal with Unicode [Braille][] characters
 
-![Drawille](https://raw.github.com/asciimoo/drawille/master/docs/drawille_01.png)
+[Braille]: http://en.wikipedia.org/wiki/Braille
+
+![Drawille](docs/images/drawille_01.png)
+
+![Drawille](docs/images/sine_tracking.gif)
+
+![Drawille](docs/images/rotating_cube.gif)
 
 
 ### USAGE
@@ -20,6 +26,8 @@ for x in range(0, 1800, 10):
 
 print c.frame()
 ```
+
+![Usage](docs/images/usage.png)
 
 
 ### Bugs
