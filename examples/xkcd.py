@@ -33,12 +33,14 @@ def getTerminalSize():
 
 def usage():
     print 'Usage: %s <url/id>'
+    exit()
 
 if __name__ == '__main__':
     if len(argv) < 2:
+        url = 'http://xkcd.com/'
+    elif argv[1] in ['-h', '--help']:
         usage()
-        exit()
-    if argv[1].startswith('http'):
+    elif argv[1].startswith('http'):
         url = argv[1]
     else:
         url = 'http://xkcd.com/%s/' % argv[1]
