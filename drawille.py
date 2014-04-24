@@ -340,9 +340,9 @@ class Canvas(object):
         minrow = min(self.pixels.keys())
         minrow -= minrow % 4
         maxrow = max(self.pixels.keys())
-        mincol = min(min(x) for x in self.pixels.values())/2
+        mincol = min(min(x) for x in self.pixels.values())//2
         mincol -= mincol % 2
-        maxcol = max(max(x) for x in self.pixels.values())/2
+        maxcol = max(max(x) for x in self.pixels.values())//2
         maxcol += maxcol % 2
         ret = ''
         i = 0
@@ -353,7 +353,7 @@ class Canvas(object):
 
             if rownum in self.pixels:
                 for colnum in self.pixels[rownum]:
-                    buff[colnum / 2].add(self.pixels[rownum][colnum])
+                    buff[colnum // 2].add(self.pixels[rownum][colnum])
 
             if i % 4 == 3:
                 maxcol = max(max(buff.keys() or [0]), 4)
