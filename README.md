@@ -10,6 +10,7 @@ Drawing in terminal with unicode braille characters
 ### USAGE
 
 ```python
+from __future__ import print_function
 from drawille import Canvas
 from math import sin, radians
 
@@ -18,7 +19,7 @@ c = Canvas()
 for x in range(0, 1800, 10):
     c.set(x / 10, 10 + sin(radians(x)) * 10)
 
-print c.frame()
+print(c.frame())
 ```
 
 

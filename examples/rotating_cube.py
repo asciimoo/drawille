@@ -1,3 +1,4 @@
+from __future__ import print_function
 from drawille import Canvas, line
 import math
 from time import sleep
@@ -82,7 +83,7 @@ while 1:
 
     c.set(-80,-80)
     c.set(80,80)
-    print "\x1b[2J\x1b[H" + c.frame()
+    print("\x1b[2J\x1b[H" + c.frame())
 
     angleX += 2
     angleY += 3

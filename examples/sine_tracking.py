@@ -1,3 +1,4 @@
+from __future__ import print_function
 from drawille import Canvas, line
 import math
 from time import sleep
@@ -10,7 +11,7 @@ while True:
     for x in range(0, 360, 2):
         coords = (x/2, height + int(round(math.sin(math.radians(x+i)) * height)))
         c.set(*coords)
-    print "\x1b[2J\x1b[H" + c.frame()
+    print("\x1b[2J\x1b[H" + c.frame())
     i += 2
     sleep(1.0/24)
     c.clear()
