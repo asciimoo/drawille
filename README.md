@@ -33,6 +33,22 @@ print(c.frame())
 ![Usage](docs/images/usage.png)
 
 
+### Installation
+
+
+To install drawille, simply:
+
+```bash
+$ pip install drawille
+```
+
+or
+
+```bash
+$ easy_install drawille
+```
+
+
 ### Bugs
 
 Bugs or suggestions? Visit the [issue tracker](https://github.com/asciimoo/drawille/issues).
