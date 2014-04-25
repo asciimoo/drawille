@@ -7,7 +7,7 @@ setup(
     author_email = 'asciimoo@gmail.com',
     description = ('Drawing in terminal with unicode braille characters'),
     license = 'AGPLv3+',
-    keywordrawille = "data query",
+    keywords = "terminal braille drawing canvas console",
     url = 'https://github.com/asciimoo/drawille',
     scripts = ['drawille.py'],
     py_modules = ['drawille'],
