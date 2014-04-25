@@ -8,6 +8,8 @@ Drawing in terminal with Unicode [Braille][] characters
 
 ![Drawille](docs/images/drawille_01.png)
 
+![Drawille](docs/images/xkcd.png)
+
 ![Drawille](docs/images/sine_tracking.gif)
 
 ![Drawille](docs/images/rotating_cube.gif)
