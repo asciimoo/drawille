@@ -327,6 +327,8 @@ class Canvas(object):
         y = normalize(y)
         if y in self.pixels and x in self.pixels[y]:
             del(self.pixels[y][x])
+            if not self.pixels[y]:
+                del(self.pixels[y])
 
     def toggle(self, x, y):
         x = normalize(x)
