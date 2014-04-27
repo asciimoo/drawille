@@ -305,8 +305,6 @@ def normalize(coord):
         return int(round(coord))
 
 
-
-
 class Canvas(object):
     """docstring for Surface"""
     def __init__(self, line_ending='\n'):
@@ -358,7 +356,7 @@ class Canvas(object):
                     buff[colnum // 2].add(self.pixels[rownum][colnum])
 
             if i % 4 == 3:
-                maxcol = max(max(buff.keys() or [0]), 4)
+                maxcol = max(buff.keys() or [0])
                 ret += ''.join(braille_map[''.join(sorted(buff.get(x, [])))] for x in range(mincol, maxcol+1))
                 if rownum != maxrow:
                     ret += self.line_ending
@@ -366,7 +364,7 @@ class Canvas(object):
             i += 1
 
         if buff and i % 4:
-            maxcol = max(max(buff.keys() or [0]), 4)
+            maxcol = max(buff.keys() or [0])
             ret += ''.join(braille_map[''.join(sorted(buff.get(x, [])))] for x in range(mincol, maxcol+1))
 
         return ret
