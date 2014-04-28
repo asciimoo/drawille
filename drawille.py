@@ -18,6 +18,11 @@
 from collections import defaultdict
 from operator import or_
 import math
+from sys import version_info
+IS_PY3 = version_info[0] == 3
+
+if IS_PY3:
+    from functools import reduce
 
 """
 

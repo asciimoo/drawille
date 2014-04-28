@@ -45,7 +45,6 @@ class CanvasTestCase(TestCase):
     def test_frame(self):
         c = Canvas()
         c.set(0,0)
-        self.assertEqual(c.frame(), '\xe2\xa0\x81')
         self.assertEqual(c.frame(), '⠁')
 
 
