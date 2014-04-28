@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from drawille import Canvas
-from PIL import Image
 from sys import argv, exit
+try:
+    from PIL import Image
+except:
+    from sys import stderr
+    stderr.write('[E] PIL not installed')
+    exit(1)
 from StringIO import StringIO
 import urllib2
 import re
+from drawille import Canvas
 
 
 def getTerminalSize():
@@ -32,7 +37,7 @@ def getTerminalSize():
 
 
 def usage():
-    print 'Usage: %s <url/id>'
+    print('Usage: %s <url/id>')
     exit()
 
 if __name__ == '__main__':
@@ -65,4 +70,4 @@ if __name__ == '__main__':
         if x >= w:
             y += 1
             x = 0
-    print can.frame()
+    print(can.frame())

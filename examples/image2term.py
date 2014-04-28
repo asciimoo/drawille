@@ -1,8 +1,13 @@
 # example:
 # $  PYTHONPATH=`pwd` python examples/image2term.py http://fc00.deviantart.net/fs71/f/2011/310/5/a/giant_nyan_cat_by_daieny-d4fc8u1.png -t 100 -r 0.01
 
+try:
+    from PIL import Image
+except:
+    from sys import stderr, exit
+    stderr.write('[E] PIL not installed')
+    exit(1)
 from drawille import Canvas
-from PIL import Image
 from StringIO import StringIO
 import urllib2
 

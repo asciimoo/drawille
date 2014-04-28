@@ -13,11 +13,12 @@ sizes = ((0, 0),
          (40, 40),
          (100, 100))
 
-
 for x, y in sizes:
     c.set(0, 0)
+
     for i in range(y):
         c.set(x, i)
+
     r = timeit(c.frame, number=frames)
     print('{0}x{1}\t{2}'.format(x, y, r))
     c.clear()
