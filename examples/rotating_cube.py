@@ -1,7 +1,13 @@
-from __future__ import print_function
 from drawille import Canvas, line
+import curses
 import math
 from time import sleep
+import locale
+
+locale.setlocale(locale.LC_ALL,"")
+
+stdscr = curses.initscr()
+stdscr.refresh()
 
 class Point3D:
     def __init__(self, x = 0, y = 0, z = 0):
@@ -57,36 +63,44 @@ vertices = [
 # indices to the vertices list defined above.
 faces = [(0,1,2,3),(1,5,6,2),(5,4,7,6),(4,0,3,7),(0,4,5,1),(3,2,6,7)]
 
-angleX, angleY, angleZ = 0, 0, 0
-c = Canvas()
-while 1:
-    # Will hold transformed vertices.
-    t = []
 
-    for v in vertices:
-        # Rotate the point around X axis, then around Y axis, and finally around Z axis.
-        p = v.rotateX(angleX).rotateY(angleY).rotateZ(angleZ)
-        # Transform the point from 3D to 2D
-        #p = p.project(50, 50, 50, 50)
-        # Put the point in the list of transformed vertices
-        t.append(p)
+def __main__(stdscr):
+    angleX, angleY, angleZ = 0, 0, 0
+    c = Canvas()
+    while 1:
+        # Will hold transformed vertices.
+        t = []
 
-    for f in faces:
-        for x,y in line(t[f[0]].x, t[f[0]].y, t[f[1]].x, t[f[1]].y):
-            c.set(x,y)
-        for x,y in line(t[f[1]].x, t[f[1]].y, t[f[2]].x, t[f[2]].y):
-            c.set(x,y)
-        for x,y in line(t[f[2]].x, t[f[2]].y, t[f[3]].x, t[f[3]].y):
-            c.set(x,y)
-        for x,y in line(t[f[3]].x, t[f[3]].y, t[f[0]].x, t[f[0]].y):
-            c.set(x,y)
+        for v in vertices:
+            # Rotate the point around X axis, then around Y axis, and finally around Z axis.
+            p = v.rotateX(angleX).rotateY(angleY).rotateZ(angleZ)
+            # Transform the point from 3D to 2D
+            #p = p.project(50, 50, 50, 50)
+            # Put the point in the list of transformed vertices
+            t.append(p)
 
-    c.set(-80,-80)
-    c.set(80,80)
-    print("\x1b[2J\x1b[H" + c.frame())
+        for f in faces:
+            for x,y in line(t[f[0]].x, t[f[0]].y, t[f[1]].x, t[f[1]].y):
+                c.set(x,y)
+            for x,y in line(t[f[1]].x, t[f[1]].y, t[f[2]].x, t[f[2]].y):
+                c.set(x,y)
+            for x,y in line(t[f[2]].x, t[f[2]].y, t[f[3]].x, t[f[3]].y):
+                c.set(x,y)
+            for x,y in line(t[f[3]].x, t[f[3]].y, t[f[0]].x, t[f[0]].y):
+                c.set(x,y)
 
-    angleX += 2
-    angleY += 3
-    angleZ += 5
-    sleep(1.0/20)
-    c.clear()
+        c.set(-40,-40)
+        c.set(-40,40)
+
+        f = c.frame()+'\n'
+        stdscr.addstr(0, 0, f)
+        stdscr.refresh()
+
+        angleX += 2
+        angleY += 3
+        angleZ += 5
+        sleep(1.0/20)
+        c.clear()
+
+if __name__ == '__main__':
+    curses.wrapper(__main__)
