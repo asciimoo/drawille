@@ -64,7 +64,7 @@ vertices = [
 faces = [(0,1,2,3),(1,5,6,2),(5,4,7,6),(4,0,3,7),(0,4,5,1),(3,2,6,7)]
 
 
-def __main__(stdscr):
+def __main__(stdscr, projection=False):
     angleX, angleY, angleZ = 0, 0, 0
     c = Canvas()
     while 1:
@@ -74,9 +74,10 @@ def __main__(stdscr):
         for v in vertices:
             # Rotate the point around X axis, then around Y axis, and finally around Z axis.
             p = v.rotateX(angleX).rotateY(angleY).rotateZ(angleZ)
-            # Transform the point from 3D to 2D
-            #p = p.project(50, 50, 50, 50)
-            # Put the point in the list of transformed vertices
+            if projection:
+                # Transform the point from 3D to 2D
+                p = p.project(50, 50, 50, 50)
+             #Put the point in the list of transformed vertices
             t.append(p)
 
         for f in faces:
@@ -90,7 +91,7 @@ def __main__(stdscr):
                 c.set(x,y)
 
         c.set(-40,-40)
-        c.set(-40,40)
+        c.set(-40,80)
 
         f = c.frame()+'\n'
         stdscr.addstr(0, 0, f)
@@ -103,4 +104,8 @@ def __main__(stdscr):
         c.clear()
 
 if __name__ == '__main__':
-    curses.wrapper(__main__)
+    from sys import argv
+    projection = False
+    if '-p' in argv:
+        projection = True
+    curses.wrapper(__main__, projection)
