@@ -50,6 +50,7 @@ class CanvasTestCase(TestCase):
 
     def test_frame(self):
         c = Canvas()
+        self.assertEqual(c.frame(), '')
         c.set(0, 0)
         self.assertEqual(c.frame(), '⠁')
 

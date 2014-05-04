@@ -351,6 +351,8 @@ class Canvas(object):
             self.pixels[y][x+i*2] = c
 
     def rows(self):
+        if not self.pixels.keys():
+            return []
         minrow = min(self.pixels.keys())
         minrow -= minrow % 4
         maxrow = max(self.pixels.keys())
