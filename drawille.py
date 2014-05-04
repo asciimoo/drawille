@@ -342,6 +342,14 @@ class Canvas(object):
         else:
             self.set(x, y)
 
+    def set_text(self, x, y, text):
+        x = normalize(x)
+        x -= x % 2
+        y = normalize(y)
+        y -= y % 4
+        for i,c in enumerate(text):
+            self.pixels[y][x+i*2] = c
+
     def rows(self):
         minrow = min(self.pixels.keys())
         minrow -= minrow % 4
@@ -355,23 +363,39 @@ class Canvas(object):
         for rownum in range(minrow, maxrow+1):
 
             if not i % 4:
-                buff = defaultdict(set)
+                buff = defaultdict(list)
 
             if rownum in self.pixels:
-                for colnum in self.pixels[rownum]:
-                    buff[colnum // 2].add(self.pixels[rownum][colnum])
+                for colnum in sorted(self.pixels[rownum].keys()):
+                    buff[colnum // 2].append(self.pixels[rownum][colnum])
 
             if i % 4 == 3:
                 maxcol = max(buff.keys() or [0])
-                ret.append(''.join(braille_map[reduce(or_, buff.get(x, [0]))]
-                                   for x in range(mincol, maxcol+1)))
+                row = []
+                for x in  range(mincol, maxcol+1):
+                    char_idx = buff.get(x)
+                    if not char_idx:
+                        row.append(braille_map[0])
+                    elif type(char_idx[0]) != int:
+                        row.append(char_idx[0])
+                    else:
+                        row.append(braille_map[reduce(or_, char_idx)])
+                ret.append(''.join(row))
 
             i += 1
 
         if buff and i % 4:
             maxcol = max(buff.keys() or [0])
-            ret.append(''.join(braille_map[reduce(or_, buff.get(x, [0]))]
-                               for x in range(mincol, maxcol+1)))
+            row = []
+            for x in  range(mincol, maxcol+1):
+                char_idx = buff.get(x)
+                if not char_idx:
+                    row.append(braille_map[0])
+                elif type(char_idx[0]) != int:
+                    row.append(char_idx[0])
+                else:
+                    row.append(braille_map[reduce(or_, char_idx)])
+            ret.append(''.join(row))
 
         return ret
 
