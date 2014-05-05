@@ -93,8 +93,8 @@ def __main__(stdscr, projection=False):
         c.set(-40,-40)
         c.set(-40,80)
 
-        f = c.frame()+'\n'
-        stdscr.addstr(0, 0, f)
+        f = c.frame()
+        stdscr.addstr(0, 0, '{0}\n'.format(f))
         stdscr.refresh()
 
         angleX += 2

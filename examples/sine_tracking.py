@@ -24,8 +24,8 @@ def __main__(stdscr):
             coords = (x/2, height + int(round(math.sin(math.radians(x+i)) * height)))
             c.set(*coords)
 
-        f = c.frame()+'\n'
-        stdscr.addstr(0, 0, f)
+        f = c.frame()
+        stdscr.addstr(0, 0, '{0}\n'.format(f))
         stdscr.refresh()
 
         i += 2
