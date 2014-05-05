@@ -16,14 +16,12 @@
 # (C) 2014- by Adam Tauber, <asciimoo@gmail.com>
 
 from collections import defaultdict
-from operator import or_
 import math
 from sys import version_info
 
 IS_PY3 = version_info[0] == 3
 
 if IS_PY3:
-    from functools import reduce
     unichr = chr
 
 """
@@ -160,57 +158,6 @@ class Canvas(object):
                 else:
                     row.append(unichr(braille_char_offset+char))
             ret.append(''.join(row))
-        return ret
-
-    def _rows(self):
-        if not self.chars.keys():
-            return []
-        minrow = min(self.chars.keys())
-        minrow -= minrow % 4
-        maxrow = max(self.chars.keys())
-        mincol = min(min(x) for x in self.chars.values())//2
-        mincol -= mincol % 2
-        maxcol = max(max(x) for x in self.chars.values())//2
-        maxcol += maxcol % 2
-        ret = []
-        i = 0
-        for rownum in range(minrow, maxrow+1):
-
-            if not i % 4:
-                buff = defaultdict(list)
-
-            if rownum in self.chars:
-                for colnum in sorted(self.chars[rownum].keys()):
-                    buff[colnum // 2].append(self.chars[rownum][colnum])
-
-            if i % 4 == 3:
-                maxcol = max(buff.keys() or [0])
-                row = []
-                for x in  range(mincol, maxcol+1):
-                    char_idx = buff.get(x)
-                    if not char_idx:
-                        row.append(' ')
-                    elif type(char_idx[0]) != int:
-                        row.append(char_idx[0])
-                    else:
-                        row.append(unichr(braille_char_offset+reduce(or_, char_idx)))
-                ret.append(''.join(row))
-
-            i += 1
-
-        if buff and i % 4:
-            maxcol = max(buff.keys() or [0])
-            row = []
-            for x in  range(mincol, maxcol+1):
-                char_idx = buff.get(x)
-                if not char_idx:
-                    row.append(' ')
-                elif type(char_idx[0]) != int:
-                    row.append(char_idx[0])
-                else:
-                    row.append(unichr(braille_char_offset+reduce(or_, char_idx)))
-            ret.append(''.join(row))
-
         return ret
 
     def frame(self):
