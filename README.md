@@ -73,3 +73,8 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
 
 (C) 2014- by Adam Tauber, <asciimoo@gmail.com>
 ```
+
+### Other implementations:
+
+ * [https://github.com/madbence/node-drawille](https://github.com/madbence/node-drawille) (nodejs)
+
