@@ -6,6 +6,8 @@ Drawing in terminal with Unicode [Braille][] characters
 
 [Braille]: http://en.wikipedia.org/wiki/Braille
 
+[http://api.flattr.com/button/flattr-badge-large.png](https://flattr.com/submit/auto?user_id=asciimoo&url=https://github.com/asciimoo/drawilletitle=drawille&language=&tags=github&category=software)
+
 ![Drawille](docs/images/drawille_01.png)
 
 ![Drawille](docs/images/xkcd.png)
