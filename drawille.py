@@ -134,6 +134,20 @@ class Canvas(object):
         for i,c in enumerate(text):
             self.chars[y][x+i] = c
 
+    def get(self, x, y):
+        dot_index = pixel_map[y % 4][x % 2]
+        x = normalize(x / 2)
+        y = normalize(y / 4)
+        char = self.chars.get(y, {}).get(x)
+
+        if not char:
+            return False
+
+        if type(char) != int:
+            return True
+
+        return bool(char & dot_index)
+
     def rows(self, min_x=None, min_y=None, max_x=None, max_y=None):
         if not self.chars.keys():
             return []

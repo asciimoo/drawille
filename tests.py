@@ -57,10 +57,19 @@ class CanvasTestCase(TestCase):
 
     def test_max_min_limits(self):
         c = Canvas()
-        self.assertEqual(c.frame(), '')
         c.set(0, 0)
         self.assertEqual(c.frame(min_x=2), '')
         self.assertEqual(c.frame(max_x=0), '')
+
+
+    def test_get(self):
+        c = Canvas()
+        self.assertEqual(c.get(0, 0), False)
+        c.set(0, 0)
+        self.assertEqual(c.get(0, 0), True)
+        self.assertEqual(c.get(0, 1), False)
+        self.assertEqual(c.get(1, 0), False)
+        self.assertEqual(c.get(1, 1), False)
 
 
 class LineTestCase(TestCase):
