@@ -90,10 +90,7 @@ def __main__(stdscr, projection=False):
             for x,y in line(t[f[3]].x, t[f[3]].y, t[f[0]].x, t[f[0]].y):
                 c.set(x,y)
 
-        c.set(-40,-40)
-        c.set(-40,80)
-
-        f = c.frame()
+        f = c.frame(-40, -40, 80, 80)
         stdscr.addstr(0, 0, '{0}\n'.format(f))
         stdscr.refresh()
 
