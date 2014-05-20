@@ -35,7 +35,7 @@ def getTerminalSize():
     return int(cr[1]), int(cr[0])
 
 
-def image2term(image, threshold=128, ratio=None):
+def image2term(image, threshold=128, ratio=None, invert=False):
     if image.startswith('http://') or image.startswith('https://'):
         i = Image.open(StringIO(urllib2.urlopen(image).read())).convert('L')
     else:
@@ -57,13 +57,17 @@ def image2term(image, threshold=128, ratio=None):
     can = Canvas()
     x = y = 0
     for pix in i.tobytes():
-        if ord(pix) < threshold:
-            can.set(x, y)
+        if invert:
+            if ord(pix) > threshold:
+                can.set(x, y)
+        else:
+            if ord(pix) < threshold:
+                can.set(x, y)
         x += 1
         if x >= w:
             y += 1
             x = 0
-    return can.frame()
+    return can.frame(0, 0)
 
 
 def argparser():
@@ -90,6 +94,11 @@ def argparser():
                      ,type      = int
                      ,metavar   = 'N'
                      )
+    argp.add_argument('-i', '--invert'
+                     ,help      = 'Invert colors'
+                     ,default   = False
+                     ,action    = 'store_true'
+                     )
     argp.add_argument('image'
                      ,metavar   = 'FILE'
                      ,help      = 'Image file path/url'
@@ -99,7 +108,7 @@ def argparser():
 
 def __main__():
     args = argparser()
-    args['output'].write(image2term(args['image'], args['threshold'], args['ratio']))
+    args['output'].write(image2term(args['image'], args['threshold'], args['ratio'], args['invert']))
     args['output'].write('\n')
 
 
