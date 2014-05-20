@@ -134,20 +134,20 @@ class Canvas(object):
         for i,c in enumerate(text):
             self.chars[y][x+i] = c
 
-    def rows(self):
+    def rows(self, min_x=None, min_y=None, max_x=None, max_y=None):
         if not self.chars.keys():
             return []
-        minrow = min(self.chars.keys())
-        maxrow = max(self.chars.keys())
-        mincol = min(min(x.keys()) for x in self.chars.values())
-        maxcol = max(max(x.keys()) for x in self.chars.values())
+        minrow = min_y // 4 if min_y != None else min(self.chars.keys())
+        maxrow = max_y // 4 - 1 if max_y != None else max(self.chars.keys())
+        mincol = min_x // 2 if min_x != None else min(min(x.keys()) for x in self.chars.values())
+        maxcol = max_x // 2 - 1 if max_x != None else max(max(x.keys()) for x in self.chars.values())
         ret = []
         for rownum in range(minrow, maxrow+1):
             if not rownum in self.chars:
                 ret.append('')
                 continue
 
-            maxcol = max(self.chars[rownum].keys())
+            maxcol = max_x // 2 - 1 if max_x != None else max(self.chars[rownum].keys())
             row = []
             for x in  range(mincol, maxcol+1):
                 char = self.chars[rownum].get(x)
@@ -160,11 +160,12 @@ class Canvas(object):
             ret.append(''.join(row))
         return ret
 
-    def frame(self):
+    def frame(self, min_x=None, min_y=None, max_x=None, max_y=None):
+        ret = self.line_ending.join(self.rows(min_x, min_y, max_x, max_y))
         if IS_PY3:
-            return self.line_ending.join(self.rows())
+            return ret
         else:
-            return self.line_ending.join(self.rows()).encode('utf-8')
+            return ret.encode('utf-8')
 
 
 def line(x1, y1, x2, y2):
