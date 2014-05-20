@@ -190,9 +190,9 @@ class Canvas(object):
             return []
 
         minrow = min_y // 4 if min_y != None else min(self.chars.keys())
-        maxrow = max_y // 4 - 1 if max_y != None else max(self.chars.keys())
+        maxrow = (max_y - 1) // 4 if max_y != None else max(self.chars.keys())
         mincol = min_x // 2 if min_x != None else min(min(x.keys()) for x in self.chars.values())
-        maxcol = max_x // 2 - 1 if max_x != None else max(max(x.keys()) for x in self.chars.values())
+        maxcol = (max_x - 1) // 2 if max_x != None else max(max(x.keys()) for x in self.chars.values())
         ret = []
 
         for rownum in range(minrow, maxrow+1):
@@ -200,7 +200,7 @@ class Canvas(object):
                 ret.append('')
                 continue
 
-            maxcol = max_x // 2 - 1 if max_x != None else max(self.chars[rownum].keys())
+            maxcol = (max_x - 1) // 2 if max_x != None else max(self.chars[rownum].keys())
             row = []
 
             for x in  range(mincol, maxcol+1):
