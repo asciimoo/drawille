@@ -48,6 +48,8 @@ braille_char_offset = 0x2800
 
 # http://stackoverflow.com/questions/566746/how-to-get-console-window-width-in-python
 def getTerminalSize():
+    """Returns terminal width, height
+    """
     import os
     env = os.environ
 
@@ -90,29 +92,41 @@ def intdefaultdict():
 
 
 class Canvas(object):
-    """docstring for Surface"""
+    """This class implements the pixel surface """
     def __init__(self, line_ending='\n'):
         super(Canvas, self).__init__()
         self.clear()
         self.line_ending = line_ending
 
     def clear(self):
+        """Remove all pixels from the :class:`Canvas` object."""
         self.chars = defaultdict(intdefaultdict)
 
     def _get_pos(self, x, y):
+        """Convert x, y to cols, rows"""
         x = normalize(x)
         y = normalize(y)
-        px = x // 2
-        py = y // 4
-        return x, y, px, py
+        cols = x // 2
+        rows = y // 4
+        return x, y, cols, rows
 
     def set(self, x, y):
+        """Set a pixel of the :class:`Canvas` object.
+
+        :param x: x coordinate of the pixel
+        :param y: y coordinate of the pixel
+        """
         x, y, px, py = self._get_pos(x, y)
         if type(self.chars[py][px]) != int:
             return
         self.chars[py][px] |= pixel_map[y % 4][x % 2]
 
     def unset(self, x, y):
+        """Unset a pixel of the :class:`Canvas` object.
+
+        :param x: x coordinate of the pixel
+        :param y: y coordinate of the pixel
+        """
         x, y, px, py = self._get_pos(x, y)
         if type(self.chars[py][px]) == int:
             self.chars[py][px] &= ~pixel_map[y % 4][x % 2]
@@ -122,6 +136,11 @@ class Canvas(object):
             del(self.chars[py])
 
     def toggle(self, x, y):
+        """Toggle a pixel of the :class:`Canvas` object.
+
+        :param x: x coordinate of the pixel
+        :param y: y coordinate of the pixel
+        """
         x, y, px, py = self._get_pos(x, y)
         if type(self.chars[py][px]) != int or self.chars[py][px] & pixel_map[y % 4][x % 2]:
             self.unset(x, y)
@@ -129,12 +148,22 @@ class Canvas(object):
             self.set(x, y)
 
     def set_text(self, x, y, text):
+        """Set text to the given coords.
+
+        :param x: x coordinate of the text start position
+        :param y: y coordinate of the text start position
+        """
         x = normalize(x / 2)
         y = normalize(y / 4)
         for i,c in enumerate(text):
             self.chars[y][x+i] = c
 
     def get(self, x, y):
+        """Get the state of a pixel. Returns bool.
+
+        :param x: x coordinate of the pixel
+        :param y: y coordinate of the pixel
+        """
         dot_index = pixel_map[y % 4][x % 2]
         x = normalize(x / 2)
         y = normalize(y / 4)
@@ -149,13 +178,23 @@ class Canvas(object):
         return bool(char & dot_index)
 
     def rows(self, min_x=None, min_y=None, max_x=None, max_y=None):
+        """Returns a list of the current :class:`Canvas` object lines.
+
+        :param min_x: (optional) minimum x coordinate of the canvas
+        :param min_y: (optional) minimum y coordinate of the canvas
+        :param max_x: (optional) maximum x coordinate of the canvas
+        :param max_y: (optional) maximum y coordinate of the canvas
+        """
+
         if not self.chars.keys():
             return []
+
         minrow = min_y // 4 if min_y != None else min(self.chars.keys())
         maxrow = max_y // 4 - 1 if max_y != None else max(self.chars.keys())
         mincol = min_x // 2 if min_x != None else min(min(x.keys()) for x in self.chars.values())
         maxcol = max_x // 2 - 1 if max_x != None else max(max(x.keys()) for x in self.chars.values())
         ret = []
+
         for rownum in range(minrow, maxrow+1):
             if not rownum in self.chars:
                 ret.append('')
@@ -163,23 +202,35 @@ class Canvas(object):
 
             maxcol = max_x // 2 - 1 if max_x != None else max(self.chars[rownum].keys())
             row = []
+
             for x in  range(mincol, maxcol+1):
                 char = self.chars[rownum].get(x)
+
                 if not char:
                     row.append(' ')
                 elif type(char) != int:
                     row.append(char)
                 else:
                     row.append(unichr(braille_char_offset+char))
+
             ret.append(''.join(row))
+
         return ret
 
     def frame(self, min_x=None, min_y=None, max_x=None, max_y=None):
+        """String representation of the current :class:`Canvas` object pixels.
+
+        :param min_x: (optional) minimum x coordinate of the canvas
+        :param min_y: (optional) minimum y coordinate of the canvas
+        :param max_x: (optional) maximum x coordinate of the canvas
+        :param max_y: (optional) maximum y coordinate of the canvas
+        """
         ret = self.line_ending.join(self.rows(min_x, min_y, max_x, max_y))
+
         if IS_PY3:
             return ret
-        else:
-            return ret.encode('utf-8')
+
+        return ret.encode('utf-8')
 
 
 def line(x1, y1, x2, y2):
@@ -199,10 +250,12 @@ def line(x1, y1, x2, y2):
     for i in range(r+1):
         x = x1
         y = y1
+
         if ydiff:
             y += (float(i)*ydiff)/r*ydir
         if xdiff:
             x += (float(i)*xdiff)/r*xdir
+
         yield (x, y)
 
 
@@ -216,5 +269,6 @@ def polygon(center_x=0, center_y=0, sides=4, radius=4):
         y1 = (center_x+math.sin(math.radians(a)))*(radius+1)/2
         x2 = (center_x+math.cos(math.radians(b)))*(radius+1)/2
         y2 = (center_x+math.sin(math.radians(b)))*(radius+1)/2
+
         for x,y in line(x1,y1,x2,y2):
             yield x,y
