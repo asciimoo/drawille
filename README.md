@@ -76,9 +76,12 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
 (C) 2014- by Adam Tauber, <asciimoo@gmail.com>
 ```
 
-### Other implementations:
+### Other implementations/similar projects
 
  * [https://github.com/madbence/node-drawille](https://github.com/madbence/node-drawille) (nodejs)
+ * [https://github.com/exrook/drawille-go](https://github.com/exrook/drawille-go) (go)
+ * [https://github.com/maerch/ruby-drawille](https://github.com/maerch/ruby-drawille) (ruby)
+ * [https://github.com/sunetos/DotPlot.jl](https://github.com/sunetos/DotPlot.jl) (julia)
 
 
 ### Further reading
