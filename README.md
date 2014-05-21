@@ -80,3 +80,9 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
 
  * [https://github.com/madbence/node-drawille](https://github.com/madbence/node-drawille) (nodejs)
 
+
+### Further reading
+
+ * [HackerNews](https://news.ycombinator.com/item?id=7776112)
+ * [Reddit](http://www.reddit.com/r/programming/comments/263opn/drawille_pixel_graphics_in_a_terminal_using/)
+ * [blog.yjl.im](http://blog.yjl.im/2014/04/xkcd-comics-in-braille-using-drawille.html)
