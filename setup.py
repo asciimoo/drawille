@@ -9,7 +9,7 @@ setup(
     license = 'AGPLv3+',
     keywords = "terminal braille drawing canvas console",
     url = 'https://github.com/asciimoo/drawille',
-    scripts = ['drawille.py'],
+    scripts = [],
     py_modules = ['drawille'],
     packages = find_packages(),
     install_requires = [],
