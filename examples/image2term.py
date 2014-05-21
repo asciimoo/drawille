@@ -56,7 +56,13 @@ def image2term(image, threshold=128, ratio=None, invert=False):
             i = i.resize((w, h), Image.ANTIALIAS)
     can = Canvas()
     x = y = 0
-    for pix in i.tobytes():
+
+    try:
+         i_converted = i.tobytes()
+    except AttributeError:
+         i_converted = i.tostring()
+
+    for pix in i_converted:
         if invert:
             if ord(pix) > threshold:
                 can.set(x, y)

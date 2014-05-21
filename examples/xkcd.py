@@ -63,7 +63,13 @@ if __name__ == '__main__':
         i = i.resize((w, h), Image.ANTIALIAS)
     can = Canvas()
     x = y = 0
-    for pix in i.tobytes():
+
+    try:
+         i_converted = i.tobytes()
+    except AttributeError:
+         i_converted = i.tostring()
+
+    for pix in i_converted:
         if ord(pix) < 128:
             can.set(x, y)
         x += 1
