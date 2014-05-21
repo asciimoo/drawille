@@ -17,6 +17,7 @@
 
 from collections import defaultdict
 import math
+import os
 from sys import version_info
 
 IS_PY3 = version_info[0] == 3
@@ -93,7 +94,7 @@ def intdefaultdict():
 
 class Canvas(object):
     """This class implements the pixel surface """
-    def __init__(self, line_ending='\n'):
+    def __init__(self, line_ending=os.linesep):
         super(Canvas, self).__init__()
         self.clear()
         self.line_ending = line_ending
