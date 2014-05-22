@@ -82,6 +82,7 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
  * [https://github.com/exrook/drawille-go](https://github.com/exrook/drawille-go) (go)
  * [https://github.com/maerch/ruby-drawille](https://github.com/maerch/ruby-drawille) (ruby)
  * [https://github.com/sunetos/DotPlot.jl](https://github.com/sunetos/DotPlot.jl) (julia)
+ * [https://github.com/mkremins/drawille-clj](https://github.com/mkremins/drawille-clj) (clojure)
 
 
 ### Further reading
