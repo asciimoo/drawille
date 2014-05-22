@@ -92,7 +92,7 @@ def intdefaultdict():
     return defaultdict(int)
 
 
-def get_pos(self, x, y):
+def get_pos(x, y):
     """Convert x, y to cols, rows"""
     return normalize(x) // 2, normalize(y) // 4
 
