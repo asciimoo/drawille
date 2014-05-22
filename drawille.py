@@ -15,10 +15,10 @@
 #
 # (C) 2014- by Adam Tauber, <asciimoo@gmail.com>
 
-from collections import defaultdict
 import math
 import os
 from sys import version_info
+from collections import defaultdict
 
 IS_PY3 = version_info[0] == 3
 
@@ -92,24 +92,24 @@ def intdefaultdict():
     return defaultdict(int)
 
 
+def get_pos(self, x, y):
+    """Convert x, y to cols, rows"""
+    return normalize(x) // 2, normalize(y) // 4
+
+
 class Canvas(object):
     """This class implements the pixel surface """
+
     def __init__(self, line_ending=os.linesep):
         super(Canvas, self).__init__()
         self.clear()
         self.line_ending = line_ending
 
+
     def clear(self):
         """Remove all pixels from the :class:`Canvas` object."""
         self.chars = defaultdict(intdefaultdict)
 
-    def _get_pos(self, x, y):
-        """Convert x, y to cols, rows"""
-        x = normalize(x)
-        y = normalize(y)
-        cols = x // 2
-        rows = y // 4
-        return x, y, cols, rows
 
     def set(self, x, y):
         """Set a pixel of the :class:`Canvas` object.
@@ -117,10 +117,13 @@ class Canvas(object):
         :param x: x coordinate of the pixel
         :param y: y coordinate of the pixel
         """
-        x, y, px, py = self._get_pos(x, y)
-        if type(self.chars[py][px]) != int:
+        col, row = get_pos(x, y)
+
+        if type(self.chars[row][col]) != int:
             return
-        self.chars[py][px] |= pixel_map[y % 4][x % 2]
+
+        self.chars[row][col] |= pixel_map[y % 4][x % 2]
+
 
     def unset(self, x, y):
         """Unset a pixel of the :class:`Canvas` object.
@@ -128,13 +131,17 @@ class Canvas(object):
         :param x: x coordinate of the pixel
         :param y: y coordinate of the pixel
         """
-        x, y, px, py = self._get_pos(x, y)
-        if type(self.chars[py][px]) == int:
-            self.chars[py][px] &= ~pixel_map[y % 4][x % 2]
-        if type(self.chars[py][px]) != int or self.chars[py][px] == 0:
-            del(self.chars[py][px])
-        if not self.chars.get(py):
-            del(self.chars[py])
+        col, row = get_pos(x, y)
+
+        if type(self.chars[row][col]) == int:
+            self.chars[row][col] &= ~pixel_map[y % 4][x % 2]
+
+        if type(self.chars[row][col]) != int or self.chars[row][col] == 0:
+            del(self.chars[row][col])
+
+        if not self.chars.get(row):
+            del(self.chars[row])
+
 
     def toggle(self, x, y):
         """Toggle a pixel of the :class:`Canvas` object.
@@ -142,11 +149,13 @@ class Canvas(object):
         :param x: x coordinate of the pixel
         :param y: y coordinate of the pixel
         """
-        x, y, px, py = self._get_pos(x, y)
-        if type(self.chars[py][px]) != int or self.chars[py][px] & pixel_map[y % 4][x % 2]:
+        col, row = get_pos(x, y)
+
+        if type(self.chars[row][col]) != int or self.chars[row][col] & pixel_map[y % 4][x % 2]:
             self.unset(x, y)
         else:
             self.set(x, y)
+
 
     def set_text(self, x, y, text):
         """Set text to the given coords.
@@ -156,8 +165,10 @@ class Canvas(object):
         """
         x = normalize(x / 2)
         y = normalize(y / 4)
+
         for i,c in enumerate(text):
             self.chars[y][x+i] = c
+
 
     def get(self, x, y):
         """Get the state of a pixel. Returns bool.
@@ -177,6 +188,7 @@ class Canvas(object):
             return True
 
         return bool(char & dot_index)
+
 
     def rows(self, min_x=None, min_y=None, max_x=None, max_y=None):
         """Returns a list of the current :class:`Canvas` object lines.
@@ -217,6 +229,7 @@ class Canvas(object):
             ret.append(''.join(row))
 
         return ret
+
 
     def frame(self, min_x=None, min_y=None, max_x=None, max_y=None):
         """String representation of the current :class:`Canvas` object pixels.
