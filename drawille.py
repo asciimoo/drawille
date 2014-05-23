@@ -294,3 +294,48 @@ def polygon(center_x=0, center_y=0, sides=4, radius=4):
 
         for x, y in line(x1, y1, x2, y2):
             yield x, y
+
+
+class Turtle(Canvas):
+    """Turtle graphics interface"""
+
+    def __init__(self):
+        self.x_pos = 0
+        self.y_pos = 0
+        self.rotation = 0
+        self.brush_on = False
+        super(Turtle, self).__init__()
+
+
+    def up(self):
+        self.brush_on = False
+
+
+    def down(self):
+        self.brush_on = True
+
+
+    def forward(self, step):
+        x = self.x_pos + math.cos(math.radians(self.rotation)) * step
+        y = self.y_pos + math.sin(math.radians(self.rotation)) * step
+        prev_brush_state = self.brush_on
+        self.brush_on = True
+        self.move(x, y)
+        self.brush_on = prev_brush_state
+
+
+    def move(self, x, y):
+        if self.brush_on:
+            for lx, ly in line(self.x_pos, self.y_pos, x, y):
+                self.set(normalize(lx), normalize(ly))
+
+        self.x_pos = x
+        self.y_pos = y
+
+
+    def right(self, angle):
+        self.rotation += angle
+
+
+    def left(self, angle):
+        self.rotation -= angle
