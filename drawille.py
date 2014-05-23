@@ -282,11 +282,11 @@ def line(x1, y1, x2, y2):
 
 
 def polygon(center_x=0, center_y=0, sides=4, radius=4):
-    degree = float(360)/sides
+    degree = float(360) / sides
 
     for n in range(sides):
-        a = n*degree
-        b = (n+1)*degree
+        a = n * degree
+        b = (n + 1) * degree
         x1 = (center_x + math.cos(math.radians(a))) * (radius + 1) / 2
         y1 = (center_y + math.sin(math.radians(a))) * (radius + 1) / 2
         x2 = (center_x + math.cos(math.radians(b))) * (radius + 1) / 2
@@ -299,9 +299,9 @@ def polygon(center_x=0, center_y=0, sides=4, radius=4):
 class Turtle(Canvas):
     """Turtle graphics interface"""
 
-    def __init__(self):
-        self.x_pos = 0
-        self.y_pos = 0
+    def __init__(self, pos_x=0, pos_y=0):
+        self.pos_x = pos_x
+        self.pos_y = pos_y
         self.rotation = 0
         self.brush_on = False
         super(Turtle, self).__init__()
@@ -316,8 +316,8 @@ class Turtle(Canvas):
 
 
     def forward(self, step):
-        x = self.x_pos + math.cos(math.radians(self.rotation)) * step
-        y = self.y_pos + math.sin(math.radians(self.rotation)) * step
+        x = self.pos_x + math.cos(math.radians(self.rotation)) * step
+        y = self.pos_y + math.sin(math.radians(self.rotation)) * step
         prev_brush_state = self.brush_on
         self.brush_on = True
         self.move(x, y)
@@ -326,11 +326,11 @@ class Turtle(Canvas):
 
     def move(self, x, y):
         if self.brush_on:
-            for lx, ly in line(self.x_pos, self.y_pos, x, y):
+            for lx, ly in line(self.pos_x, self.pos_y, x, y):
                 self.set(normalize(lx), normalize(ly))
 
-        self.x_pos = x
-        self.y_pos = y
+        self.pos_x = x
+        self.pos_y = y
 
 
     def right(self, angle):
@@ -339,3 +339,17 @@ class Turtle(Canvas):
 
     def left(self, angle):
         self.rotation -= angle
+
+
+    def back(self, step):
+        self.forward(-step)
+
+
+    # aliases
+    pu = up
+    pd = down
+    fd = forward
+    mv = move
+    rt = right
+    lt = left
+    bk = back
