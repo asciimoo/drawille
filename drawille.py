@@ -83,9 +83,10 @@ def normalize(coord):
 
     if coord_type == int:
         return coord
-
     elif coord_type == float:
         return int(round(coord))
+    else:
+        raise TypeError("Unsupported coordinate type <{0}>".format(type(coord)))
 
 
 def intdefaultdict():
@@ -273,9 +274,9 @@ def line(x1, y1, x2, y2):
         y = y1
 
         if ydiff:
-            y += (float(i)*ydiff)/r*ydir
+            y += (float(i) * ydiff) / r * ydir
         if xdiff:
-            x += (float(i)*xdiff)/r*xdir
+            x += (float(i) * xdiff) / r * xdir
 
         yield (x, y)
 
@@ -286,10 +287,10 @@ def polygon(center_x=0, center_y=0, sides=4, radius=4):
     for n in range(sides):
         a = n*degree
         b = (n+1)*degree
-        x1 = (center_x+math.cos(math.radians(a)))*(radius+1)/2
-        y1 = (center_y+math.sin(math.radians(a)))*(radius+1)/2
-        x2 = (center_x+math.cos(math.radians(b)))*(radius+1)/2
-        y2 = (center_y+math.sin(math.radians(b)))*(radius+1)/2
+        x1 = (center_x + math.cos(math.radians(a))) * (radius + 1) / 2
+        y1 = (center_y + math.sin(math.radians(a))) * (radius + 1) / 2
+        x2 = (center_x + math.cos(math.radians(b))) * (radius + 1) / 2
+        y2 = (center_y + math.sin(math.radians(b))) * (radius + 1) / 2
 
-        for x,y in line(x1,y1,x2,y2):
-            yield x,y
+        for x, y in line(x1, y1, x2, y2):
+            yield x, y
