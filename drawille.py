@@ -248,6 +248,13 @@ class Canvas(object):
 
 
 def line(x1, y1, x2, y2):
+    """Returns the coords of the line between (x1, y1), (x2, y2)
+
+    :param x1: x coordinate of the startpoint
+    :param y1: y coordinate of the startpoint
+    :param x2: x coordinate of the endpoint
+    :param y2: y coordinate of the endpoint
+    """
 
     x1 = normalize(x1)
     y1 = normalize(y1)
