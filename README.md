@@ -34,6 +34,21 @@ print(c.frame())
 
 ![Usage](docs/images/usage.png)
 
+```python
+from drawille import Turtle
+
+t = Turtle()
+
+for _ in range(36):
+    t.right(10)
+    for _ in range(36):
+        t.right(10)
+        t.forward(8)
+
+print(t.frame())
+```
+
+![Turtle](docs/images/turtle.png)
 
 ### Installation
 
