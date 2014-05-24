@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from drawille import Canvas, line
+from drawille import Canvas, line, Turtle
 from unittest import TestCase, main
 
 
@@ -89,6 +89,41 @@ class LineTestCase(TestCase):
 
     def test_diagonal(self):
         self.assertEqual(list(line(0, 0, 1, 1)), [(0, 0), (1, 1)])
+
+
+class TurtleTestCase(TestCase):
+
+
+    def test_position(self):
+        t = Turtle()
+        self.assertEqual(t.pos_x, 0)
+        self.assertEqual(t.pos_y, 0)
+        t.move(1, 1)
+        self.assertEqual(t.pos_x, 1)
+        self.assertEqual(t.pos_y, 1)
+
+
+    def test_rotation(self):
+        t = Turtle()
+        self.assertEqual(t.rotation, 0)
+        t.right(30)
+        self.assertEqual(t.rotation, 30)
+        t.left(30)
+        self.assertEqual(t.rotation, 0)
+
+
+    def test_brush(self):
+        t = Turtle()
+        self.assertFalse(t.get(t.pos_x, t.pos_y))
+        t.forward(1)
+        self.assertTrue(t.get(0, 0))
+        self.assertTrue(t.get(t.pos_x, t.pos_y))
+        t.up()
+        t.move(2, 0)
+        self.assertFalse(t.get(t.pos_x, t.pos_y))
+        t.down()
+        t.move(3, 0)
+        self.assertTrue(t.get(t.pos_x, t.pos_y))
 
 
 if __name__ == '__main__':
