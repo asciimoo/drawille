@@ -309,7 +309,7 @@ class Turtle(Canvas):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.rotation = 0
-        self.brush_on = False
+        self.brush_on = True
         super(Turtle, self).__init__()
 
 
@@ -333,7 +333,7 @@ class Turtle(Canvas):
     def move(self, x, y):
         if self.brush_on:
             for lx, ly in line(self.pos_x, self.pos_y, x, y):
-                self.set(normalize(lx), normalize(ly))
+                self.set(lx, ly)
 
         self.pos_x = x
         self.pos_y = y
