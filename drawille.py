@@ -118,6 +118,8 @@ class Canvas(object):
         :param x: x coordinate of the pixel
         :param y: y coordinate of the pixel
         """
+        x = normalize(x)
+        y = normalize(y)
         col, row = get_pos(x, y)
 
         if type(self.chars[row][col]) != int:
@@ -132,6 +134,8 @@ class Canvas(object):
         :param x: x coordinate of the pixel
         :param y: y coordinate of the pixel
         """
+        x = normalize(x)
+        y = normalize(y)
         col, row = get_pos(x, y)
 
         if type(self.chars[row][col]) == int:
@@ -150,6 +154,8 @@ class Canvas(object):
         :param x: x coordinate of the pixel
         :param y: y coordinate of the pixel
         """
+        x = normalize(x)
+        y = normalize(y)
         col, row = get_pos(x, y)
 
         if type(self.chars[row][col]) != int or self.chars[row][col] & pixel_map[y % 4][x % 2]:
@@ -164,11 +170,10 @@ class Canvas(object):
         :param x: x coordinate of the text start position
         :param y: y coordinate of the text start position
         """
-        x = normalize(x / 2)
-        y = normalize(y / 4)
+        col, row = get_pos(x, y)
 
         for i,c in enumerate(text):
-            self.chars[y][x+i] = c
+            self.chars[row][col+i] = c
 
 
     def get(self, x, y):
@@ -177,10 +182,11 @@ class Canvas(object):
         :param x: x coordinate of the pixel
         :param y: y coordinate of the pixel
         """
+        x = normalize(x)
+        y = normalize(y)
         dot_index = pixel_map[y % 4][x % 2]
-        x = normalize(x / 2)
-        y = normalize(y / 4)
-        char = self.chars.get(y, {}).get(x)
+        col, row = get_pos(x, y)
+        char = self.chars.get(row, {}).get(col)
 
         if not char:
             return False
