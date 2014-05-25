@@ -99,7 +99,7 @@ def get_pos(x, y):
 
 
 class Canvas(object):
-    """This class implements the pixel surface """
+    """This class implements the pixel surface."""
 
     def __init__(self, line_ending=os.linesep):
         super(Canvas, self).__init__()
@@ -303,7 +303,9 @@ def polygon(center_x=0, center_y=0, sides=4, radius=4):
 
 
 class Turtle(Canvas):
-    """Turtle graphics interface"""
+    """Turtle graphics interface
+    http://en.wikipedia.org/wiki/Turtle_graphics
+    """
 
     def __init__(self, pos_x=0, pos_y=0):
         self.pos_x = pos_x
@@ -314,14 +316,20 @@ class Turtle(Canvas):
 
 
     def up(self):
+        """Pull the brush up."""
         self.brush_on = False
 
 
     def down(self):
+        """Push the brush down."""
         self.brush_on = True
 
 
     def forward(self, step):
+        """Move the turtle forward.
+
+        :param step: Integer. Distance to move forward.
+        """
         x = self.pos_x + math.cos(math.radians(self.rotation)) * step
         y = self.pos_y + math.sin(math.radians(self.rotation)) * step
         prev_brush_state = self.brush_on
@@ -331,6 +339,11 @@ class Turtle(Canvas):
 
 
     def move(self, x, y):
+        """Move the turtle to a coordinate.
+
+        :param x: x coordinate
+        :param y: y coordinate
+        """
         if self.brush_on:
             for lx, ly in line(self.pos_x, self.pos_y, x, y):
                 self.set(lx, ly)
@@ -340,14 +353,26 @@ class Turtle(Canvas):
 
 
     def right(self, angle):
+        """Rotate the turtle (positive direction).
+
+        :param angle: Integer. Rotation angle in degrees.
+        """
         self.rotation += angle
 
 
     def left(self, angle):
+        """Rotate the turtle (negative direction).
+
+        :param angle: Integer. Rotation angle in degrees.
+        """
         self.rotation -= angle
 
 
     def back(self, step):
+        """Move the turtle backwards.
+
+        :param step: Integer. Distance to move backwards.
+        """
         self.forward(-step)
 
 
