@@ -100,6 +100,7 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
  * [https://github.com/mkremins/drawille-clj](https://github.com/mkremins/drawille-clj) (clojure)
  * [https://github.com/mydzor/bash-drawille](https://github.com/mydzor/bash-drawille) (bash)
  * [https://github.com/hoelzro/term-drawille](https://github.com/hoelzro/term-drawille) (perl 5)
+ * [https://github.com/whatthejeff/drawille](https://github.com/whatthejeff/drawille) (PHP)
 
 
 ### Further reading
