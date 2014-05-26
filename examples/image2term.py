@@ -95,7 +95,7 @@ def argparser():
                      )
     argp.add_argument('-t', '--threshold'
                      ,help      = 'Color threshold'
-                     ,default   = 1
+                     ,default   = 128
                      ,action    = 'store'
                      ,type      = int
                      ,metavar   = 'N'
