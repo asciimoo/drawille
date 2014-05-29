@@ -50,8 +50,8 @@ print(t.frame())
 
 ![Turtle](docs/images/turtle.png)
 
-### Installation
 
+### Installation
 
 To install drawille, simply:
 
@@ -72,6 +72,7 @@ Bugs or suggestions? Visit the [issue tracker](https://github.com/asciimoo/drawi
 
 (Tested only with `urxvt` terminal and `fixed` font.)
 
+
 ### LICENSE
 
 ```
@@ -91,12 +92,13 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
 (C) 2014- by Adam Tauber, <asciimoo@gmail.com>
 ```
 
+
 ### Other implementations / similar projects
 
  * [https://github.com/madbence/node-drawille](https://github.com/madbence/node-drawille) (nodejs)
  * [https://github.com/exrook/drawille-go](https://github.com/exrook/drawille-go) (go)
  * [https://github.com/maerch/ruby-drawille](https://github.com/maerch/ruby-drawille) (ruby)
- * [https://github.com/sunetos/DotPlot.jl](https://github.com/sunetos/DotPlot.jl) (julia)
+ * [https://github.com/sunetos/TextPlots.jl](https://github.com/sunetos/TextPlots.jl) (julia)
  * [https://github.com/mkremins/drawille-clj](https://github.com/mkremins/drawille-clj) (clojure)
  * [https://github.com/mydzor/bash-drawille](https://github.com/mydzor/bash-drawille) (bash)
  * [https://github.com/hoelzro/term-drawille](https://github.com/hoelzro/term-drawille) (perl 5)
