@@ -19,6 +19,8 @@ import math
 import os
 from sys import version_info
 from collections import defaultdict
+from time import sleep
+import curses
 
 IS_PY3 = version_info[0] == 3
 
@@ -384,3 +386,31 @@ class Turtle(Canvas):
     rt = right
     lt = left
     bk = back
+
+
+def animate(canvas, fn, delay=1./24):
+    """Animation automatition function
+
+    :param canvas: :class:`Canvas` object
+    :param fn: Callable. Frame coord generator
+    :param delay: Float. Delay between frames.
+    """
+
+    # python2 unicode curses fix
+    if not IS_PY3:
+        import locale
+        locale.setlocale(locale.LC_ALL, "")
+
+    def animation(stdscr):
+
+        for frame in fn():
+            for x,y in frame:
+                canvas.set(x,y)
+
+            f = canvas.frame()
+            stdscr.addstr(0, 0, '{0}\n'.format(f))
+            stdscr.refresh()
+            sleep(delay)
+            canvas.clear()
+
+    curses.wrapper(animation)
