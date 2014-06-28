@@ -388,12 +388,13 @@ class Turtle(Canvas):
     bk = back
 
 
-def animate(canvas, fn, delay=1./24):
+def animate(canvas, fn, delay=1./24, *args, **kwargs):
     """Animation automatition function
 
     :param canvas: :class:`Canvas` object
     :param fn: Callable. Frame coord generator
     :param delay: Float. Delay between frames.
+    :param *args, **kwargs: optional fn parameters
     """
 
     # python2 unicode curses fix
@@ -403,7 +404,7 @@ def animate(canvas, fn, delay=1./24):
 
     def animation(stdscr):
 
-        for frame in fn():
+        for frame in fn(*args, **kwargs):
             for x,y in frame:
                 canvas.set(x,y)
 
