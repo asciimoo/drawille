@@ -411,7 +411,8 @@ def animate(canvas, fn, delay=1./24, *args, **kwargs):
             f = canvas.frame()
             stdscr.addstr(0, 0, '{0}\n'.format(f))
             stdscr.refresh()
-            sleep(delay)
+            if delay:
+                sleep(delay)
             canvas.clear()
 
     curses.wrapper(animation)
