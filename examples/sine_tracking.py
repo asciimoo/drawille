@@ -8,12 +8,15 @@ def __main__():
 
     while True:
         frame = []
-        for x,y in line(0, height, 180, math.sin(math.radians(i)) * height + height):
-            frame.append((x,y))
 
-        for x in range(0, 360, 2):
-            coords = (x/2, height + math.sin(math.radians(x+i)) * height)
-            frame.append((coords[0], coords[1]))
+        frame.extend([coords for coords in
+                      line(0,
+                           height,
+                           180,
+                           math.sin(math.radians(i)) * height + height)])
+
+        frame.extend([(x/2, height + math.sin(math.radians(x+i)) * height)
+                      for x in range(0, 360, 2)])
 
         yield frame
 
@@ -22,5 +25,4 @@ def __main__():
 
 
 if __name__ == '__main__':
-    c = Canvas()
-    animate(c, __main__, 1./60)
+    animate(Canvas(), __main__, 1./60)
