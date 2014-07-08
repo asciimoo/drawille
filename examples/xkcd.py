@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sys import argv, exit
+from sys import argv
 try:
     from PIL import Image
 except:

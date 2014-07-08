@@ -149,7 +149,7 @@ def check_collision(bird_pos, bar):
     return False
 
 def main(stdscr):
-    global frame_no, speed, fps, position, delta, score
+    global frame_no, speed, position, score
     c = Canvas()
     bar_width = 16
     bars = [Bar(bar_width)]

@@ -53,7 +53,6 @@ braille_char_offset = 0x2800
 def getTerminalSize():
     """Returns terminal width, height
     """
-    import os
     env = os.environ
 
     def ioctl_GWINSZ(fd):

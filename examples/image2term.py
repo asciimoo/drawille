@@ -4,8 +4,8 @@
 try:
     from PIL import Image
 except:
-    from sys import stderr, exit
-    stderr.write('[E] PIL not installed')
+    from sys import stderr
+    stderr.write('[E] PIL not installed\n')
     exit(1)
 from drawille import Canvas
 from StringIO import StringIO
@@ -46,9 +46,8 @@ def image2term(image, threshold=128, ratio=None, invert=False):
         h = int(h * ratio)
         i = i.resize((w, h), Image.ANTIALIAS)
     else:
-        tw, th = getTerminalSize()
+        tw = getTerminalSize()[0]
         tw *= 2
-        th *= 2
         if tw < w:
             ratio = tw / float(w)
             w = tw
