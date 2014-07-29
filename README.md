@@ -114,3 +114,4 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
  * [Reddit](http://www.reddit.com/r/programming/comments/263opn/drawille_pixel_graphics_in_a_terminal_using/)
  * [ohloh](http://www.ohloh.net/p/drawille)
  * [xkcd comics in Braille using drawille](http://blog.yjl.im/2014/04/xkcd-comics-in-braille-using-drawille.html)
+ * [Braille unicode pixelation](http://blog.jverkamp.com/2014/05/30/braille-unicode-pixelation/)
