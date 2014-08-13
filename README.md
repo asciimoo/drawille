@@ -70,7 +70,20 @@ $ easy_install drawille
 
 Bugs or suggestions? Visit the [issue tracker](https://github.com/asciimoo/drawille/issues).
 
-(Tested only with `urxvt` terminal and `fixed` font.)
+
+Tested fonts
+
+| Font  | Works |
+| ----- | ----- |
+| Fixed | Yes   |
+
+
+Tested terminals
+
+| Terminal     | Works |
+| ------------ | ----- |
+| rxvt-unicode | Yes   |
+
 
 
 ### LICENSE
