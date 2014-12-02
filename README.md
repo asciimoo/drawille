@@ -73,9 +73,10 @@ Bugs or suggestions? Visit the [issue tracker](https://github.com/asciimoo/drawi
 
 Tested fonts
 
-| Font  | Works |
-| ----- | ----- |
-| Fixed | Yes   |
+| Font     | Works |
+| -------- | ----- |
+| Terminus | Yes   |
+| Fixed    | Yes   |
 
 
 Tested terminals
