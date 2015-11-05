@@ -122,6 +122,7 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
  * [https://github.com/liam-middlebrook/drawille-sharp](https://github.com/liam-middlebrook/drawille-sharp) (C#)
  * [https://github.com/asciimoo/lua-drawille](https://github.com/asciimoo/lua-drawille) (Lua)
  * [https://github.com/l-a-i-n/drawille-plusplus](https://github.com/l-a-i-n/drawille-plusplus) (CPP)
+ * [https://github.com/massn/elixir-drawille](https://github.com/massn/elixir-drawille) (elixir)
 
 
 ### Further reading
