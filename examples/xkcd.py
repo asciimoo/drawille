@@ -27,7 +27,7 @@ if __name__ == '__main__':
     else:
         url = 'http://xkcd.com/%s/' % argv[1]
     c = urllib2.urlopen(url).read()
-    img_url = re.findall('http:\/\/imgs.xkcd.com\/comics\/[^"\']+', c)[0]
+    img_url = re.findall('http:\/\/imgs.xkcd.com\/comics\/.*\.png', c)[0]
     i = Image.open(StringIO(urllib2.urlopen(img_url).read())).convert('L')
     w, h = i.size
     tw, th = getTerminalSize()
