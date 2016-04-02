@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'drawille',
-    version = '0.0.4',
+    version = '0.1.0',
     author = 'Adam Tauber',
     author_email = 'asciimoo@gmail.com',
     description = ('Drawing in terminal with unicode braille characters'),
