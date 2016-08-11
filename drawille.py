@@ -388,7 +388,7 @@ class Turtle(Canvas):
 
 
 def animate(canvas, fn, delay=1./24, *args, **kwargs):
-    """Animation automatition function
+    """Animation automation function
 
     :param canvas: :class:`Canvas` object
     :param fn: Callable. Frame coord generator
