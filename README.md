@@ -126,6 +126,7 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
  * [https://github.com/sshbio/drawille](https://github.com/sshbio/drawille) (emacs lisp)
  * [https://gist.github.com/sshbio/###](https://gist.github.com/sshbio/cb0073a0e8c50a681288c8bff74d9c4b) (awk, images only)
  * [https://github.com/Huulivoide/libdrawille](https://github.com/Huulivoide/libdrawille) (c)
+ * [https://github.com/PMunch/drawille-nim](https://github.com/PMunch/drawille-nim) (nim)
 
 
 ### Further reading
