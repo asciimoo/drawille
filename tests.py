@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from drawille import Canvas, line, Turtle
 from unittest import TestCase, main
 
