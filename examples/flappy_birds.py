@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import curses-
+import curses
 from drawille import Canvas, line
 from time import sleep
 from thread import start_new_thread
