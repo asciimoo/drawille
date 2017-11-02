@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 import curses
 from drawille import Canvas, line
 from time import sleep
