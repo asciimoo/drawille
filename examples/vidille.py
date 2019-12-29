@@ -79,7 +79,15 @@ def image2term(i:Image, canvas_width=160, canvas_height=100, threshold=128, dith
 
 
 def play( video_path, terminal_width=80, terminal_height=25, dither=False ):
- 
+    """
+    A generator which yields drawille-rendered frames from a video file.
+    
+    Args:
+        video_path: path to a video file.
+        terminal_with: width of the terminal, in columns.
+        terminal_height: height of the terminal, in rows.
+        dither: if True, will dither the frames using Pillow's built-in Floyd-Steinberg dither.
+    """
     container = av.open( video_path )
 
     canvas_width = terminal_width *2
