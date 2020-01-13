@@ -9,13 +9,15 @@ by prehensile [ twitter.com/prehensile | me@prehensile.co.uk ]
 A hack of image2term3, which uses pyav to pull frames from a video,
 drawille to render frames and curses to draw frames in the terminal. 
 
-I'm pleasantly surprised it works at all,
-let alone at a reasonable frame rate!
+I'm pleasantly surprised it works at all, let alone at a reasonable frame rate!
 
 Requires:
+- Python 3
 - drawille: https://pypi.org/project/drawille/
-- pillow: https://pypi.org/project/Pillow/
-- av: https://pypi.org/project/av/
+- Pillow: https://pypi.org/project/Pillow/
+- PyAV (and its dependencies): https://pypi.org/project/av/
+
+For a running demo, try `telnet spacewizards.org 2020`
 
 """
 
@@ -25,7 +27,12 @@ import curses
 
 import av
 from drawille import Canvas
-from PIL import Image
+try:
+    from PIL import Image
+except:
+    from sys import stderr
+    stderr.write('[E] PIL not installed\n')
+    exit(1)
 
 
 def image2term(i:Image, canvas_width=160, canvas_height=100, threshold=128, dither=False, invert=False):
@@ -66,10 +73,10 @@ def image2term(i:Image, canvas_width=160, canvas_height=100, threshold=128, dith
 
     for pix in i_converted:
         if invert:
-            if pix > threshold:
+            if pix < threshold:
                 can.set(x, y)
         else:
-            if pix < threshold:
+            if pix > threshold:
                 can.set(x, y)
         x += 1
         if x >= image_width:
@@ -78,7 +85,7 @@ def image2term(i:Image, canvas_width=160, canvas_height=100, threshold=128, dith
     return can.frame(0, 0)
 
 
-def play( video_path, terminal_width=80, terminal_height=25, dither=False ):
+def play( video_path, terminal_width=80, terminal_height=25, dither=False, threshold=128, invert=False ):
     """
     A generator which yields drawille-rendered frames from a video file.
     
@@ -100,17 +107,41 @@ def play( video_path, terminal_width=80, terminal_height=25, dither=False ):
             canvas_width = canvas_width,
             canvas_height = canvas_height,
             dither = dither,
-            invert = True
+            invert = invert,
+            threshold = threshold
         )
         yield f
 
 
-def curses_main( stdscr ): 
-    
-    if len(sys.argv) > 1:
-        path = sys.argv[1]
-    else:
-        raise Exception( "usage: vidille.py [path to video file]" )
+def parse_args():
+    import argparse
+    from sys import stdout
+    argp = argparse.ArgumentParser(description='terminal video player example script for drawille')
+    argp.add_argument('-t', '--threshold'
+                     ,help      = 'Color threshold'
+                     ,default   = 128
+                     ,action    = 'store'
+                     ,type      = int
+                     ,metavar   = 'N'
+                     )
+    argp.add_argument('-i', '--invert'
+                     ,help      = 'Invert colors'
+                     ,default   = False
+                     ,action    = 'store_true'
+                     )
+    argp.add_argument('-d', '--dither'
+                     ,help      = 'Dither display'
+                     ,default   = False
+                     ,action    = 'store_true'
+                     )
+    argp.add_argument('file'
+                     ,metavar   = 'FILE'
+                     ,help      = 'Video file path'
+                     )
+    return vars(argp.parse_args())
+
+
+def curses_main( stdscr, args ): 
     
     # get terminal height and width from curses
     terminal_height, terminal_width = stdscr.getmaxyx()
@@ -119,10 +150,12 @@ def curses_main( stdscr ):
     curses.curs_set( 0 )
 
     for screen in play(
-            path,
+            args['file'],
             terminal_width = terminal_width,
             terminal_height = terminal_height,
-            dither = False
+            dither = args[ 'dither' ],
+            threshold = args[ 'threshold' ],
+            invert = args[ 'invert' ]
         ):
         stdscr.clear()
         stdscr.addstr( screen )
@@ -130,5 +163,6 @@ def curses_main( stdscr ):
 
 
 if __name__ == "__main__":
-    curses.wrapper( curses_main )
+    args = parse_args()
+    curses.wrapper( curses_main, args )
    
