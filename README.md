@@ -73,10 +73,11 @@ Bugs or suggestions? Visit the [issue tracker](https://github.com/asciimoo/drawi
 
 Tested fonts
 
-| Font     | Works |
-| -------- | ----- |
-| Terminus | Yes   |
-| Fixed    | Yes   |
+| Font           | Works |
+| -------------- | ----- |
+| Terminus       | Yes   |
+| Fixed          | Yes   |
+| DejaVuSansMono | Yes   |
 
 
 Tested terminals
