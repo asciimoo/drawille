@@ -20,6 +20,7 @@ import os
 from sys import version_info
 from collections import defaultdict
 from time import sleep
+from typing import Union
 import curses
 
 IS_PY3 = version_info[0] == 3
@@ -75,29 +76,18 @@ def getTerminalSize():
 
     if not cr:
         cr = (env.get('LINES', 25), env.get('COLUMNS', 80))
-
+        
     return int(cr[1]), int(cr[0])
 
-
-def normalize(coord):
-    coord_type = type(coord)
-
-    if coord_type == int:
-        return coord
-    elif coord_type == float:
-        return int(round(coord))
-    else:
-        raise TypeError("Unsupported coordinate type <{0}>".format(type(coord)))
-
+def normalize(coord: Union[int, float]):
+    return coord if type(coord) == int else int(round(coord))
 
 def intdefaultdict():
     return defaultdict(int)
 
-
 def get_pos(x, y):
     """Convert x, y to cols, rows"""
     return normalize(x) // 2, normalize(y) // 4
-
 
 class Canvas(object):
     """This class implements the pixel surface."""
