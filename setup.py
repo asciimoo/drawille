@@ -12,7 +12,7 @@ setup(
     scripts = [],
     py_modules = ['drawille'],
     packages = find_packages(),
-    install_requires = [],
+    install_requires = ['typing;python_version<"3.5"'],
     download_url = 'https://github.com/asciimoo/drawille/tarball/master',
     # TODO
     #entry_points={
