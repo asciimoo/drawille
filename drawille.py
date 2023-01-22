@@ -228,7 +228,7 @@ class Canvas(object):
                 char = self.chars[rownum].get(x)
 
                 if not char:
-                    row.append(unichr(braille_char_offset))
+                    row.append(" ")
                 elif type(char) != int:
                     row.append(char)
                 else:
