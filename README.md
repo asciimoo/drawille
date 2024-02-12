@@ -120,6 +120,7 @@ along with drawille. If not, see < http://www.gnu.org/licenses/ >.
  * [https://github.com/hoelzro/term-drawille](https://github.com/hoelzro/term-drawille) (perl 5)
  * [https://github.com/whatthejeff/php-drawille](https://github.com/whatthejeff/php-drawille) (PHP)
  * [https://github.com/yamadapc/haskell-drawille](https://github.com/yamadapc/haskell-drawille) (haskell)
+ * [https://github.com/nidhoggfgg/rsille](https://github.com/nidhoggfgg/rsille) (rust)
  * [https://github.com/P1start/drawille-rs](https://github.com/P1start/drawille-rs) (rust)
  * [https://github.com/liam-middlebrook/drawille-sharp](https://github.com/liam-middlebrook/drawille-sharp) (C#)
  * [https://github.com/asciimoo/lua-drawille](https://github.com/asciimoo/lua-drawille) (Lua)
